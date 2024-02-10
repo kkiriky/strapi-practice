@@ -1,4 +1,4 @@
-export default () => ({
+export default ({ env }) => ({
   // https://github.com/ComfortablyCoding/strapi-plugin-transformer
   transformer: {
     enabled: true,
@@ -25,6 +25,20 @@ export default () => ({
 
           // 페이지네이션 응답이 아닌 경우에는 data, meta 제거
           ctx.response.body = ctx.response.body.data;
+        },
+      },
+    },
+  },
+  upload: {
+    config: {
+      provider: 'aws-s3', // For community providers pass the full package name (e.g. provider: 'strapi-provider-upload-google-cloud-storage')
+      providerOptions: {
+        accessKeyId: env('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: env('AWS_SECRET_ACCESS_KEY'),
+        region: env('AWS_REGION'),
+        params: {
+          ACL: env('AWS_ACL', 'private'), // 'private' if you want to make the uploaded files private
+          Bucket: env('AWS_BUCKET_NAME'),
         },
       },
     },
