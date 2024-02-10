@@ -20,7 +20,8 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::article.article",
-      "inversedBy": "hashtags"
+      "inversedBy": "hashtags",
+      "required": true
     }
   }
 }

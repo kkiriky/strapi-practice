@@ -21,9 +21,7 @@
       "required": true
     },
     "thumbnail": {
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "type": "media",
       "multiple": false,
       "required": true
@@ -32,13 +30,15 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::category.category",
-      "mappedBy": "articles"
+      "mappedBy": "articles",
+      "required": true
     },
     "hashtags": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::hashtag.hashtag",
-      "mappedBy": "articles"
+      "mappedBy": "articles",
+      "required": true
     },
     "comments": {
       "type": "relation",

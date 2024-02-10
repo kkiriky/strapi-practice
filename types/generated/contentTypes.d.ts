@@ -800,12 +800,14 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::article.article',
       'manyToMany',
       'api::category.category'
-    >;
+    > &
+      Attribute.Required;
     hashtags: Attribute.Relation<
       'api::article.article',
       'manyToMany',
       'api::hashtag.hashtag'
-    >;
+    > &
+      Attribute.Required;
     comments: Attribute.Relation<
       'api::article.article',
       'oneToMany',
@@ -845,7 +847,8 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'api::category.category',
       'manyToMany',
       'api::article.article'
-    >;
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -880,7 +883,8 @@ export interface ApiCommentComment extends Schema.CollectionType {
       'api::comment.comment',
       'manyToOne',
       'api::article.article'
-    >;
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -915,7 +919,8 @@ export interface ApiHashtagHashtag extends Schema.CollectionType {
       'api::hashtag.hashtag',
       'manyToMany',
       'api::article.article'
-    >;
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

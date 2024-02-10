@@ -19,7 +19,8 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::article.article",
-      "inversedBy": "comments"
+      "inversedBy": "comments",
+      "required": true
     }
   }
 }
