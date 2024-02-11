@@ -25,9 +25,40 @@ export default factories.createCoreController(
         },
       });
 
-      console.log(result);
-
       return result;
+    },
+
+    async search(ctx) {
+      try {
+        await this.validateQuery(ctx);
+        const sanitizedQueryParams = await this.sanitizeQuery(ctx);
+        const keyword = sanitizedQueryParams.keyword as string;
+
+        const result = await strapi.entityService.findMany(
+          'api::article.article',
+          {
+            populate: '*',
+            filters: {
+              $or: [
+                {
+                  title: {
+                    $containsi: keyword,
+                  },
+                },
+                {
+                  content: {
+                    $containsi: keyword,
+                  },
+                },
+              ],
+            },
+          }
+        );
+
+        ctx.body = { data: result };
+      } catch (err) {
+        ctx.body = err;
+      }
     },
   })
 );

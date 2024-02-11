@@ -1,3 +1,12 @@
+import { DefaultContext, DefaultState, ParameterizedContext } from 'koa';
+
+type ExtendedContext = ParameterizedContext<
+  DefaultState,
+  DefaultContext,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { data: any; meta?: any }
+>;
+
 export default ({ env }) => ({
   // https://github.com/ComfortablyCoding/strapi-plugin-transformer
   transformer: {
@@ -8,14 +17,14 @@ export default ({ env }) => ({
         removeDataKey: true,
       },
       hooks: {
-        postResponseTransform: (ctx) => {
+        postResponseTransform: (ctx: ExtendedContext) => {
           const { data, meta } = ctx.response.body;
 
           /*  meta에 pagination 외의 다른 정보가 들어가는 경우가 있다면 이 방식은 사용 X */
           // 페이지네이션에 응답일 경우 meta.pagination 제거
           // Before: meta.pagination.page, meta.pagination.pageSize, meta.pagination.pageCount, meta.pagination.total
           // After: meta.page, meta.pageSize, meta.pageCount, meta.total
-          if (Object.keys(meta).length && meta.pagination) {
+          if (meta && Object.keys(meta).length && meta.pagination) {
             ctx.response.body = {
               data,
               meta: meta.pagination,
