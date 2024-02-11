@@ -12,5 +12,11 @@ export default factories.createCoreRouter('api::article.article', {
     findOne: {
       middlewares: ['api::article.format-image'],
     },
+    update: {
+      middlewares: ['api::article.format-image', 'api::article.is-owner'],
+    },
+    delete: {
+      middlewares: ['api::article.is-owner'],
+    },
   },
 });
