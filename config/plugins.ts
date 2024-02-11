@@ -23,8 +23,10 @@ export default ({ env }) => ({
             return;
           }
 
-          // 페이지네이션 응답이 아닌 경우에는 data, meta 제거
-          ctx.response.body = ctx.response.body.data;
+          // 페이지네이션 응답이 아닌 경우에는 meta 제거
+          ctx.response.body = {
+            data: ctx.response.body.data,
+          };
         },
       },
     },
