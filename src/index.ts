@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 export default {
   /**
    * An asynchronous register function that runs before
