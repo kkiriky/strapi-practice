@@ -6,7 +6,7 @@ export default {
       path: '/articles/search',
       handler: 'article.search',
       config: {
-        auth: false,
+        auth: false, // public 설정
         middlewares: ['api::article.format-image'],
       },
     },
@@ -16,7 +16,7 @@ export default {
       path: '/articles/pagination',
       handler: 'article.getPaginatedArticles',
       config: {
-        auth: false,
+        auth: false, // public 설정
         middlewares: ['api::article.format-image'],
       },
     },

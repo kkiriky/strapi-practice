@@ -9,10 +9,6 @@ import { plainToClass } from 'class-transformer';
 export default factories.createCoreController(
   'api::article.article',
   ({ strapi }) => ({
-    // createdBy와 updatedBy는 admin의 foreign key이므로 일반 authenticated user는 relation 설정이 불가
-    // 따라서 Strapi 생성 시 자동으로 생성되는 User Entity와 relation을 설정하여
-    // rest api 요청 시 relation을 직접 연결해줘야 함
-    // * Strapi에서 자동으로 생성되는 User Entity를 이용하면 회원가입/로그인/인증을 직접 구현할 필요가 없으므로 이를 이용하기 위함
     async create(ctx) {
       try {
         const user = ctx.state.user;
