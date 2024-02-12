@@ -1,7 +1,6 @@
 import { Next, DefaultContext, DefaultState, ParameterizedContext } from 'koa';
-import { ArticleEntity } from '../../../entities/article.entity';
 import { plainToClass } from 'class-transformer';
-import { ImageEntity } from '../../../entities/image.entity';
+import { ArticleEntity } from '../../../entities/article.entity';
 import { StrapiError } from '../../../types/error.types';
 
 type ExtendedContext = ParameterizedContext<
@@ -18,21 +17,15 @@ export default () => {
     if (!ctx.body) return;
     // is-owner 미들웨어에서 throw error 했을 경우 body에 data없이 error만 존재하므로 넘김
     if (ctx.body.error) return;
+    if (!ctx.body.data) return;
 
     if (Array.isArray(ctx.body.data)) {
       // 응답 데이터가 list 형태일 경우 (ex. find)
       ctx.body.data = ctx.body.data.map((article) => {
-        return {
-          ...article,
-          thumbnail: plainToClass(ImageEntity, article.thumbnail),
-        };
+        return plainToClass(ArticleEntity, article);
       });
     } else {
-      // 응답 데이터가 list 형태가 아닐 경우 (ex. findOne)
-      ctx.body.data = {
-        ...ctx.body.data,
-        thumbnail: plainToClass(ImageEntity, ctx.body.data.thumbnail),
-      };
+      ctx.body.data = plainToClass(ArticleEntity, ctx.body.data);
     }
   };
 };

@@ -1,12 +1,19 @@
-export interface UserEntity {
+import { Exclude } from 'class-transformer';
+
+export class UserEntity {
   id: number;
   username: string;
   email: string;
   provider: string;
+  @Exclude()
   password: string;
+  @Exclude()
   resetPasswordToken: string | null;
+  @Exclude()
   confirmationToken: string | null;
+  @Exclude()
   confirmed: boolean;
+  @Exclude()
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
