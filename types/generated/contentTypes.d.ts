@@ -399,6 +399,14 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

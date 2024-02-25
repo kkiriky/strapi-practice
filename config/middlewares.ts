@@ -9,6 +9,8 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  'global::flatten-response',
+  'global::admin-login',
   {
     name: 'strapi::security',
     config: {
